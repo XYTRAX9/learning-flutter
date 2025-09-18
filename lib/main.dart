@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(const Learning());
@@ -12,8 +13,19 @@ class Learning extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        useMaterial3: false,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
         scaffoldBackgroundColor: const Color.fromARGB(255, 31, 31, 31),
+        listTileTheme:  ListTileThemeData(iconColor: Colors.white),
+        dividerColor: Colors.white10,
+        appBarTheme: AppBarTheme(
+          backgroundColor: const Color.fromARGB(255, 31, 31, 31),
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
         textTheme: TextTheme(
           bodyMedium: const TextStyle(
             color: Colors.white,
@@ -55,12 +67,13 @@ class _MyHomePageState extends State<MyHomePage> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: ListView.builder(
+      body: ListView.separated(
           itemCount: 10,
+          separatorBuilder: (context, index) => Divider(),
           itemBuilder: (context, i) => ListTile(
+            leading: SvgPicture.asset("assets/icons/Bitcoin.svg", height: 35, width: 35,),
             title: Text(
                 "Bitcoin",
                 style: theme.textTheme.bodyMedium,
@@ -68,6 +81,10 @@ class _MyHomePageState extends State<MyHomePage> {
             subtitle: Text(
                 "200000\$",
                 style: theme.textTheme.labelSmall,
+            ),
+            trailing: Icon(
+              Icons.arrow_forward,
+
             ),
           ),
       ),
